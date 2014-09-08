@@ -1,5 +1,5 @@
-/* SuperBiclustering - A biclustering algorithm designed to
- * handle sparse and noisy input.
+/* Bimax 2 - A biclustering algorithm based on the Bron-Kerbosch
+ * Maximal Clique Enumeration Algorithm.
  * Copyright (C) 2014 Oliver Voggenreiter
  *
  * This program is free software: you can redistribute it and/or
@@ -25,7 +25,6 @@ import datatype.matrix.BinaryMatrix;
 import datatype.matrix.BitSetBinaryMatrix;
 
 public class AdjacencyMatrixPreprocessor {
-
 	/**
 	 * The method takes as input the connectivity matrix of a
 	 * bipartite graph and returns the binary matrix with the rows
@@ -79,8 +78,8 @@ public class AdjacencyMatrixPreprocessor {
 			for (int r = rows.nextSetBit(0); r > -1; r =
 					rows.nextSetBit(r + 1)) {
 				// test if the row r meets the requirements (it
-				// contains at least minC columns
-				// and also the required columns)
+				// contains at least minC columns and also the
+				// required columns)
 				if (removeNode(adj, minColumns, requiredColumns, r,
 						NodeType.ROW, cols) == true) {
 					// mark r to be deleted

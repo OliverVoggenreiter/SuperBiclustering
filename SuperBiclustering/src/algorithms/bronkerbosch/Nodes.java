@@ -1,5 +1,5 @@
-/* SuperBiclustering - A biclustering algorithm designed to
- * handle sparse and noisy input.
+/* Bimax 2 - A biclustering algorithm based on the Bron-Kerbosch
+ * Maximal Clique Enumeration Algorithm.
  * Copyright (C) 2014 Oliver Voggenreiter
  *
  * This program is free software: you can redistribute it and/or
@@ -22,19 +22,23 @@ package algorithms.bronkerbosch;
 import java.util.BitSet;
 
 /**
- * Class for storing the set of nodes in X u P (corresponding to rows or to columns).
+ * Class for storing the set of nodes in X u P (corresponding to rows
+ * or to columns).
  **/
-public class NodesData implements Cloneable {
+public class Nodes implements Cloneable {
 
-	NodeType nodeType;
+	public NodeType nodeType;
 	/**
-	 * The nodes in X u P are stored in an array. [0,...,notEnd_-1] are the nodes in X, [notEnd_,...,candidatesEnd_-1] are the nodes in P.
+	 * The nodes in X u P are stored in an array. [0,...,notEnd_-1]
+	 * are the nodes in X, [notEnd_,...,candidatesEnd_-1] are the
+	 * nodes in P.
 	 */
-	int[] nodes;
-	int notEnd;
-	int candidatesEnd;
+	public int[] nodes;
+	public int notEnd;
+	public int candidatesEnd;
 
-	NodesData(NodeType nodeType, int[] nodes, int candidateEndPivot, int notEndPivot) {
+	public Nodes(NodeType nodeType, int[] nodes,
+			int candidateEndPivot, int notEndPivot) {
 		this.nodeType = nodeType;
 		this.nodes = nodes;
 		this.notEnd = notEndPivot;
@@ -42,9 +46,10 @@ public class NodesData implements Cloneable {
 	}
 
 	/**
-	 * Constructor which is called only in the beginning, before the first call to bkv2(..)
+	 * Constructor which is called only in the beginning, before the
+	 * first call to bkv2(..)
 	 * */
-	NodesData(NodeType nodeType, int numNodes) {
+	public Nodes(NodeType nodeType, int numNodes) {
 		this.nodeType = nodeType;
 		this.notEnd = 0;
 		this.candidatesEnd = numNodes;
@@ -56,9 +61,11 @@ public class NodesData implements Cloneable {
 	}
 
 	/**
-	 * Constructor which is called only in the beginning, before the first call to bkv3(..)
+	 * Constructor which is called only in the beginning, before the
+	 * first call to bkv3(..)
 	 */
-	public NodesData(NodeType nodeType, int numNodes, int[] vert, int first, int last) {
+	public Nodes(NodeType nodeType, int numNodes, int[] vert,
+			int first, int last) {
 		this.nodeType = nodeType;
 		this.notEnd = 0;
 		this.candidatesEnd = numNodes;
@@ -73,22 +80,24 @@ public class NodesData implements Cloneable {
 		}
 	}
 
-	NodesData(NodeType nodeType, int numNodes, BitSet consideredNodes) {
+	Nodes(NodeType nodeType, int numNodes, BitSet consideredNodes) {
 		this.nodeType = nodeType;
 		this.notEnd = 0;
 		this.candidatesEnd = numNodes;
 
 		nodes = new int[numNodes];
 		int id = 0;
-		for (int n = consideredNodes.nextSetBit(0); n > -1; n = consideredNodes.nextSetBit(n + 1)) {
+		for (int n = consideredNodes.nextSetBit(0); n > -1; n =
+				consideredNodes.nextSetBit(n + 1)) {
 			nodes[id] = n;
 			id++;
 		}
 	}
 
 	@Override
-	public NodesData clone() {
-		return new NodesData(nodeType, nodes.clone(), candidatesEnd, notEnd);
+	public Nodes clone() {
+		return new Nodes(nodeType, nodes.clone(), candidatesEnd,
+				notEnd);
 	}
 
 }

@@ -1,5 +1,5 @@
-/* SuperBiclustering - A biclustering algorithm designed to
- * handle sparse and noisy input.
+/* Bimax 2 - A biclustering algorithm based on the Bron-Kerbosch
+ * Maximal Clique Enumeration Algorithm.
  * Copyright (C) 2014 Oliver Voggenreiter
  *
  * This program is free software: you can redistribute it and/or
@@ -20,5 +20,5 @@
 package algorithms.bronkerbosch;
 
 public enum NodeType {
-	ROW, COL, NODE;
+	ROW, COL;
 }

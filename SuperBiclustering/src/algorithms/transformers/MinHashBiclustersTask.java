@@ -22,9 +22,9 @@ package algorithms.transformers;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.RandomHashFunction;
 import map.KeyValuePair;
 import map.MapAlgorithm;
+import util.RandomHashFunction;
 import datatype.bicluster.Bicluster;
 import datatype.matrix.BinaryMatrix;
 

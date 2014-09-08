@@ -122,7 +122,8 @@ public class HashSetBicluster implements Bicluster {
 		try {
 			clone = (HashSetBicluster) super.clone();
 		} catch (CloneNotSupportedException e) {
-			System.err.println("Something went wrong during ArrayBicluster cloning!");
+			System.err
+			.println("Something went wrong during ArrayBicluster cloning!");
 			e.printStackTrace();
 		}
 		return clone;

@@ -1,5 +1,5 @@
-/* SuperBiclustering - A biclustering algorithm designed to
- * handle sparse and noisy input.
+/* Bimax 2 - A biclustering algorithm based on the Bron-Kerbosch
+ * Maximal Clique Enumeration Algorithm.
  * Copyright (C) 2014 Oliver Voggenreiter
  *
  * This program is free software: you can redistribute it and/or
@@ -27,29 +27,17 @@ import datatype.matrix.BinaryMatrix;
 
 public interface BronKerboschBipartite {
 
-	public abstract List<Bicluster>
-	findBiclusters(BinaryMatrix connectivityMatrix,
-			int minRows, int minCols);
+	public abstract List<Bicluster> findBiclusters(
+			BinaryMatrix connectivityMatrix);
 
 	public abstract List<Bicluster> findBiclusters(
-			BinaryMatrix connectivityMatrix, int minRows,
-			int minCols, BitSet requiredRows, BitSet requiredCols);
-
-	public abstract List<Bicluster> findBiclusters(
-			BinaryMatrix connectivityMatrix, int minRows,
-			int minCols, int maxBiclusters);
-
-	public abstract List<Bicluster> findBiclusters(
-			BinaryMatrix connectivityMatrix, int minRows,
-			int minCols, int maxBiclusters, BitSet requiredRows,
+			BinaryMatrix connectivityMatrix, BitSet requiredRows,
 			BitSet requiredCols);
 
-	public abstract long
-	getNumBiclusters(BinaryMatrix connectivityMatrix,
-			int minRows, int minCols);
+	public abstract void setMinRows(int minRows);
 
-	public abstract long getNumBiclusters(
-			BinaryMatrix connectivityMatrix, int minRows,
-			int minCols, BitSet requiredRows, BitSet requiredCols);
+	public abstract void setMinColumns(int minColumns);
+
+	public abstract void setMaxBiclusters(int maxBiclusters);
 
 }

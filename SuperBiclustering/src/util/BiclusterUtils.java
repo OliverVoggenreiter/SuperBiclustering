@@ -516,11 +516,8 @@ public class BiclusterUtils {
 
 	public static boolean canReachDensity(float minDensity,
 			int oneCount, long minArea) {
-		// TODO perhaps, move back to Greedy and make private.
 
-		if (oneCount < minDensity * minArea) { // is maximum density
-			// still achievable
-			// below minDensity?
+		if (oneCount < minDensity * minArea) {
 			logger.trace("fail - can't reach density");
 			return false;
 		}

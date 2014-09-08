@@ -53,7 +53,11 @@ public class BiclusterGenerator extends GeneratorBlock {
 
 	@Override
 	protected Collection<? extends Bicluster> findBlocks(BinaryMatrix matrix) {
-		return new BronKerboschBipartiteV3().findBiclusters(matrix, minRow, minColumn);
+		BronKerboschBipartiteV3 bronKerboschBipartiteV3 =
+				new BronKerboschBipartiteV3();
+		bronKerboschBipartiteV3.setMinRows(minRow);
+		bronKerboschBipartiteV3.setMinColumns(minColumn);
+		return bronKerboschBipartiteV3.findBiclusters(matrix);
 	}
 
 }

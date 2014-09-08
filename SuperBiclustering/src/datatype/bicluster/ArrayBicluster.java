@@ -17,13 +17,9 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package algorithms.generators;
+package datatype.bicluster;
 
 import java.util.Iterator;
-
-import datatype.bicluster.Bicluster;
-import datatype.bicluster.BinaryVector;
-import datatype.bicluster.BitSetBinaryVector;
 
 public class ArrayBicluster implements Bicluster {
 
@@ -89,7 +85,8 @@ public class ArrayBicluster implements Bicluster {
 
 		@Override
 		public void remove() {
-			throw new UnsupportedOperationException("Cannot remove element from int[] iterator.");
+			throw new UnsupportedOperationException(
+					"Cannot remove element from int[] iterator.");
 		}
 
 	}
@@ -133,7 +130,8 @@ public class ArrayBicluster implements Bicluster {
 			rows[currentRow] = rowIndex;
 			currentRow++;
 		} else {
-			throw new ArrayIndexOutOfBoundsException("Cannot add more rows to fixed size bicluster!");
+			throw new ArrayIndexOutOfBoundsException(
+					"Cannot add more rows to fixed size bicluster!");
 		}
 	}
 
@@ -143,7 +141,8 @@ public class ArrayBicluster implements Bicluster {
 			columns[currentColumn] = columnIndex;
 			currentColumn++;
 		} else {
-			throw new ArrayIndexOutOfBoundsException("Cannot add more columns to fixed size bicluster!");
+			throw new ArrayIndexOutOfBoundsException(
+					"Cannot add more columns to fixed size bicluster!");
 		}
 	}
 
@@ -156,7 +155,7 @@ public class ArrayBicluster implements Bicluster {
 
 	@Override
 	public void addColumns(BinaryVector columns) {
-		for(Integer column : columns) {
+		for (Integer column : columns) {
 			addColumn(column);
 		}
 	}
@@ -167,7 +166,8 @@ public class ArrayBicluster implements Bicluster {
 		try {
 			clone = (ArrayBicluster) super.clone();
 		} catch (CloneNotSupportedException e) {
-			System.err.println("Something went wrong during ArrayBicluster cloning!");
+			System.err
+			.println("Something went wrong during ArrayBicluster cloning!");
 			e.printStackTrace();
 		}
 		return clone;

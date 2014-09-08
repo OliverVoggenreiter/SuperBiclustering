@@ -1,5 +1,5 @@
-/* SuperBiclustering - A biclustering algorithm designed to
- * handle sparse and noisy input.
+/* Bimax 2 - A biclustering algorithm based on the Bron-Kerbosch
+ * Maximal Clique Enumeration Algorithm.
  * Copyright (C) 2014 Oliver Voggenreiter
  *
  * This program is free software: you can redistribute it and/or
@@ -22,30 +22,27 @@ package algorithms.bronkerbosch;
 public class BronKerboschBipartiteV3 extends BronKerboschBipartiteV2 {
 
 	@Override
-	protected void findMaxCliques() {
+	protected void findBiclusters() {
 
 		int[] vert =
-				DegeneracyOrdering.orderGraph(preprocessedMatrix,
-						true);
+				DegeneracyOrdering.orderGraph(inputMatrix, true);
 
 		// row nodes have indices between [0, numberOfRows) in vert
-		NodesData rowsData =
-				new NodesData(NodeType.ROW, numRows, vert, 0,
-						numRows);
+		Nodes rowsData =
+				new Nodes(NodeType.ROW, numRows, vert, 0, numRows);
 		// col nodes have indices between [numberOfRows, numberOfRows
 		// + numberOfColumns) in vert
-		NodesData colsData =
-				new NodesData(NodeType.COL, numCols, vert, numRows,
+		Nodes colsData =
+				new Nodes(NodeType.COL, numCols, vert, numRows,
 						numRows + numCols);
 
 		bkv3(rowsData, colsData, vert);
 	}
 
 	/**
-	 * Main recursive call of algorithm v3.
+	 * Main call of the Bron-Kerbosch Algorithm (Version 3).
 	 */
-	private void bkv3(NodesData rowsData, NodesData colsData,
-			int[] vert) {
+	private void bkv3(Nodes rowsData, Nodes colsData, int[] vert) {
 		int idrow = 0;
 		int idcol = 0;
 		for (int v = 0; v < vert.length; ++v) {

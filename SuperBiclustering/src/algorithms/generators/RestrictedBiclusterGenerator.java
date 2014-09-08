@@ -30,16 +30,17 @@ import algorithms.bronkerbosch.RestrictedBronKerboschBipartiteV3;
 import datatype.bicluster.Bicluster;
 import datatype.matrix.BinaryMatrix;
 
-
 public class RestrictedBiclusterGenerator extends GeneratorBlock {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RestrictedBiclusterGenerator.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(RestrictedBiclusterGenerator.class);
 
 	private int maxLevel;
 	private int minRows;
 	private int minCols;
 
-	public RestrictedBiclusterGenerator(int maxLevel, int minRows, int minColumns) {
+	public RestrictedBiclusterGenerator(int maxLevel, int minRows,
+			int minColumns) {
 		this.maxLevel = maxLevel;
 		this.minRows = minRows;
 		this.minCols = minColumns;
@@ -56,10 +57,18 @@ public class RestrictedBiclusterGenerator extends GeneratorBlock {
 	}
 
 	@Override
-	protected Collection<? extends Bicluster> findBlocks(BinaryMatrix matrix) {
+	protected Collection<? extends Bicluster> findBlocks(
+			BinaryMatrix matrix) {
 		LOGGER.debug("### Restricted Bicluster Generator ###");
-		List<Bicluster> biclusters = new RestrictedBronKerboschBipartiteV3(maxLevel).findBiclusters(matrix, minRows, minCols);
-		LOGGER.debug(String.format("Found %1d biclusters.", biclusters.size()));
+		RestrictedBronKerboschBipartiteV3 restrictedBronKerboschBipartiteV3 =
+				new RestrictedBronKerboschBipartiteV3(maxLevel);
+		restrictedBronKerboschBipartiteV3.setMinRows(minRows);
+		restrictedBronKerboschBipartiteV3.setMinColumns(minCols);
+		List<Bicluster> biclusters =
+				restrictedBronKerboschBipartiteV3
+				.findBiclusters(matrix);
+		LOGGER.debug(String.format("Found %1d biclusters.",
+				biclusters.size()));
 		LOGGER.debug("######################################");
 		return biclusters;
 	}

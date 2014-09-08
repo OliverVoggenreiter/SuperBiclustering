@@ -29,15 +29,22 @@ import datatype.bicluster.Bicluster;
 import datatype.matrix.BinaryMatrix;
 
 /**
- * The Restrictive Generator can create sets of rows/columns as blocks whereby it is guaranteed that the degeneracy of each row/column in
- * such a block meets the minimum threshold of degeneracy. This is an excellent way in order to reduce the problem space of biclustering and
- * provide a set of blocks whose union still contains all biclusters greater in size than the minimum degeneracy requirement while
- * eliminating many noisy ones in the matrix. In addtion, since many blocks are created, the problem is automatically split into independent
- * chunks for processing. It inadvertantly also provides coverage of true bicluster ones in the order of the number of biclusters that each
+ * The Restrictive Generator can create sets of rows/columns as
+ * blocks whereby it is guaranteed that the degeneracy of each
+ * row/column in such a block meets the minimum threshold of
+ * degeneracy. This is an excellent way in order to reduce the
+ * problem space of biclustering and provide a set of blocks whose
+ * union still contains all biclusters greater in size than the
+ * minimum degeneracy requirement while eliminating many noisy ones
+ * in the matrix. In addtion, since many blocks are created, the
+ * problem is automatically split into independent chunks for
+ * processing. It inadvertantly also provides coverage of true
+ * bicluster ones in the order of the number of biclusters that each
  * one is participating in.
  *
- * This class is a wrapper for the actual algorithm in order to meet the requirements of the GeneratorBlock interface. For the logic of the
- * algorithm, please see RestrictiveMatrixDegeneracy.
+ * This class is a wrapper for the actual algorithm in order to meet
+ * the requirements of the GeneratorBlock interface. For the logic of
+ * the algorithm, please see RestrictiveMatrixDegeneracy.
  *
  * @author "Oliver Voggenreiter"
  * @date Mar 7, 2013
@@ -45,7 +52,8 @@ import datatype.matrix.BinaryMatrix;
  */
 public class RestrictiveGenerator extends GeneratorBlock {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RestrictiveGenerator.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(RestrictiveGenerator.class);
 
 	private int minDegeneracy;
 
@@ -55,7 +63,8 @@ public class RestrictiveGenerator extends GeneratorBlock {
 
 	@Override
 	public String getName() {
-		return String.format("RestrictiveGenerator-MinOnes%1d", minDegeneracy);
+		return String.format("RestrictiveGenerator-MinOnes%1d",
+				minDegeneracy);
 	}
 
 	@Override
@@ -64,12 +73,16 @@ public class RestrictiveGenerator extends GeneratorBlock {
 	}
 
 	@Override
-	protected Collection<? extends Bicluster> findBlocks(BinaryMatrix matrix) {
+	protected Collection<? extends Bicluster> findBlocks(
+			BinaryMatrix matrix) {
 		LOGGER.debug("######## Restrictive Generator ########");
 
-		Collection<? extends Bicluster> superBiclusters = RestrictiveMatrixDegeneracy.computeDegenerateBlocks(matrix, minDegeneracy);
+		Collection<? extends Bicluster> superBiclusters =
+				RestrictiveMatrixDegeneracy.computeDegenerateBlocks(
+						matrix, minDegeneracy);
 
-		LOGGER.info(String.format("Created %1d Degenerate Blocks.", superBiclusters.size()));
+		LOGGER.info(String.format("Created %1d Degenerate Blocks.",
+				superBiclusters.size()));
 
 		LOGGER.debug("#######################################");
 

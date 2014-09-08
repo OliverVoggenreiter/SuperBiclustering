@@ -19,7 +19,8 @@
 
 package algorithms.bronkerbosch;
 
-public class RestrictedBronKerboschBipartiteV3 extends RestrictedBronKerboschBipartiteV2 {
+public class RestrictedBronKerboschBipartiteV3 extends
+RestrictedBronKerboschBipartiteV2 {
 
 	public RestrictedBronKerboschBipartiteV3(int maxLevel) {
 		super(maxLevel);
@@ -28,12 +29,17 @@ public class RestrictedBronKerboschBipartiteV3 extends RestrictedBronKerboschBip
 	@Override
 	protected void findMaxCliques() {
 
-		int[] vert = DegeneracyOrdering.orderGraph(preprocessedMatrix, true);
+		int[] vert =
+				DegeneracyOrdering.orderGraph(inputMatrix, true);
 
 		// row nodes have indices between [0, numberOfRows) in vert
-		NodesData rowsData = new NodesData(NodeType.ROW, numRows, vert, 0, numRows);
-		// col nodes have indices between [numberOfRows, numberOfRows + numberOfColumns) in vert
-		NodesData colsData = new NodesData(NodeType.COL, numCols, vert, numRows, numRows + numCols);
+		Nodes rowsData =
+				new Nodes(NodeType.ROW, numRows, vert, 0, numRows);
+		// col nodes have indices between [numberOfRows, numberOfRows
+		// + numberOfColumns) in vert
+		Nodes colsData =
+				new Nodes(NodeType.COL, numCols, vert, numRows,
+						numRows + numCols);
 
 		bkv3(rowsData, colsData, vert, 0);
 	}
@@ -41,7 +47,8 @@ public class RestrictedBronKerboschBipartiteV3 extends RestrictedBronKerboschBip
 	/**
 	 * Main recursive call of algorithm v3.
 	 */
-	private void bkv3(NodesData rowsData, NodesData colsData, int[] vert, int level) {
+	private void bkv3(Nodes rowsData, Nodes colsData, int[] vert,
+			int level) {
 		int idrow = 0;
 		int idcol = 0;
 		for (int v = 0; v < vert.length; ++v) {

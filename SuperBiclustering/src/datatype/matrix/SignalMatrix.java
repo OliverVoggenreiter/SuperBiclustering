@@ -23,9 +23,8 @@ import java.util.Arrays;
 
 import util.MatrixUtils;
 
-@SuppressWarnings("serial")
 public class SignalMatrix extends BasicFloatMatrix {
-	// NOTE not to be confused with mapreduce.SignalMatrix
+	private static final long serialVersionUID = 1L;
 
 	private String[] rowNames;
 	private String[] columnNames;

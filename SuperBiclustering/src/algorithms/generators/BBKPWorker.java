@@ -40,7 +40,8 @@ public class BBKPWorker implements MapAlgorithm<Integer, Bicluster> {
 		for (Integer task : bbkTasks) {
 			for (int iColumn = 0; iColumn < matrix.getNumColumns(); iColumn++) {
 				if (matrix.get(task, iColumn))
-					biclusters.addAll(BBKTaskFactory.createTask(task, iColumn).run());
+					biclusters.addAll(BBKTaskFactory.createTask(
+							task, iColumn).run());
 			}
 		}
 		return biclusters;

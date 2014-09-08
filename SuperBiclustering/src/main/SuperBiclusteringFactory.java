@@ -29,7 +29,7 @@ import algorithms.transformers.DegenerativeDrillTransformer;
 import algorithms.transformers.GreedyBlockSplitterTransformer;
 import algorithms.transformers.GreedyExpanderTransformer;
 import algorithms.transformers.IncreaseBlockDensityTransformer;
-import algorithms.transformers.OliMinHashTransformer;
+import algorithms.transformers.MinHashTransformer;
 import algorithms.transformers.RemoveLowSignificanceTransformer;
 import algorithms.transformers.SmallBiclusterFilter;
 
@@ -65,7 +65,7 @@ public class SuperBiclusteringFactory {
 										(int) (minDensity * minSize)),
 										new BlockSplitterTransformer(coreCount, 5,
 												minDensity),
-												new OliMinHashTransformer(coreCount,
+												new MinHashTransformer(coreCount,
 														looseness * minDensity, 3, 3, false,
 														false, true),
 														new IncreaseBlockDensityTransformer(
@@ -92,7 +92,7 @@ public class SuperBiclusteringFactory {
 								"SuperBiclustering-%1d-%1d-%.2f-%s.scores.tsv",
 								coreCount, minSize, minDensity, name),
 								new BiclusterGenerator(minSize, minSize),
-								new OliMinHashTransformer(coreCount,
+								new MinHashTransformer(coreCount,
 										looseness * minDensity, 3, 3, false,
 										false, true),
 										new IncreaseBlockDensityTransformer(
@@ -115,7 +115,7 @@ public class SuperBiclusteringFactory {
 										(int) (minDensity * minSize)),
 										new GreedyBlockSplitterTransformer()
 						.setCoreCount(coreCount),
-						new OliMinHashTransformer(coreCount,
+						new MinHashTransformer(coreCount,
 								looseness * minDensity, 3, 3, false,
 								false, true),
 								new GreedyExpanderTransformer(coreCount,
@@ -139,7 +139,7 @@ public class SuperBiclusteringFactory {
 								coreCount, minSize, minDensity, name),
 								new RestrictedBiclusterGenerator(minSize,
 										minSize, minSize),
-										new OliMinHashTransformer(coreCount,
+										new MinHashTransformer(coreCount,
 												looseness * minDensity, 3, 3, false,
 												false, true),
 												new GreedyExpanderTransformer(coreCount,
@@ -164,7 +164,7 @@ public class SuperBiclusteringFactory {
 								new BipartiteBronKerboschPlusGenerator()
 						.setMinSize(5).setCoreCount(
 								coreCount),
-								new OliMinHashTransformer(coreCount,
+								new MinHashTransformer(coreCount,
 										looseness * minDensity, 3, 3, false,
 										false, true),
 										new RemoveLowSignificanceTransformer(0.01f)
@@ -194,7 +194,7 @@ public class SuperBiclusteringFactory {
 										(int) (minDensity * minSize)),
 										new DegenerativeDrillTransformer(coreCount,
 												minSize, minSize, minDensity, true),
-												new OliMinHashTransformer(coreCount,
+												new MinHashTransformer(coreCount,
 														looseness * minDensity, 3, 3, false,
 														false, true),
 														new IncreaseBlockDensityTransformer(

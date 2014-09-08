@@ -1,5 +1,5 @@
-/* SuperBiclustering - A biclustering algorithm designed to
- * handle sparse and noisy input.
+/* Bimax 2 - A biclustering algorithm based on the Bron-Kerbosch
+ * Maximal Clique Enumeration Algorithm.
  * Copyright (C) 2014 Oliver Voggenreiter
  *
  * This program is free software: you can redistribute it and/or
@@ -24,27 +24,34 @@ import java.util.List;
 
 import datatype.matrix.BinaryMatrix;
 
-/***
- * @see "An O(m) Algorithm for Cores Decomposition of Networks" 2002 Vladimir Batagelj, Matjaz Zaversnik
+/**
+ * @see "An O(m) Algorithm for Cores Decomposition of Networks" 2002
+ *      Vladimir Batagelj, Matjaz Zaversnik
  */
 public class DegeneracyOrdering {
 	/**
-	 * The method computes the degeneracy ordering of a bipartite graph.
+	 * The method computes the degeneracy ordering of a bipartite
+	 * graph.
 	 */
-	public static int[] orderGraph(BinaryMatrix connected, boolean isBipartite) {
-		if (connected == null || connected.getNumRows() == 0 || connected.getNumColumns() == 0) {
-			throw new IllegalArgumentException("Matrix is null or of size 0.");
+	public static int[] orderGraph(BinaryMatrix connected,
+			boolean isBipartite) {
+		if (connected == null || connected.getNumRows() == 0
+				|| connected.getNumColumns() == 0) {
+			throw new IllegalArgumentException(
+					"Matrix is null or of size 0.");
 		}
 		// Allocate enough memory for rows and columns.
 		int cntNodes = connected.getNumRows();
 		if (isBipartite == true) {
-			// if the graph is bipartite, the input matrix is not symmetric.
+			// if the graph is bipartite, the input matrix is not
+			// symmetric.
 			cntNodes += connected.getNumColumns();
 		}
 		// Adjacency list
 		int[] degree = new int[cntNodes];
 		// Adjacency list of connections.
-		List<List<Integer>> adjL = computeAdjList(connected, isBipartite, degree);
+		List<List<Integer>> adjL =
+				computeAdjList(connected, isBipartite, degree);
 
 		int maxD = 0;
 		for (int i = 0; i < cntNodes; ++i) {
@@ -68,9 +75,12 @@ public class DegeneracyOrdering {
 	}
 
 	/***
-	 * Returns the adjacency list of a graph and also computes the degree of each vertex.
+	 * Returns the adjacency list of a graph and also computes the
+	 * degree of each vertex.
 	 */
-	private static List<List<Integer>> computeAdjList(BinaryMatrix connected, boolean isBipartite, int[] degree) {
+	private static List<List<Integer>>
+			computeAdjList(BinaryMatrix connected,
+					boolean isBipartite, int[] degree) {
 		List<List<Integer>> adjL = null;
 
 		if (isBipartite == true) { // connected is not symmetric
@@ -125,7 +135,8 @@ public class DegeneracyOrdering {
 		return adjL;
 	}
 
-	private static void computeDegeneracy(List<List<Integer>> adjL, int[] degree, int[] vert, int[] pos) {
+	private static void computeDegeneracy(List<List<Integer>> adjL,
+			int[] degree, int[] vert, int[] pos) {
 		// maximum degree of a vertex.
 		int maxDegree = degree[0];
 		for (int i : degree) {
@@ -134,7 +145,8 @@ public class DegeneracyOrdering {
 		}
 		int N = adjL.size();
 
-		// stores for each degree the position of the first vertex of that
+		// stores for each degree the position of the first vertex of
+		// that
 		// degree in array vert.
 		int[] bin = new int[maxDegree + 1];
 
@@ -143,9 +155,11 @@ public class DegeneracyOrdering {
 		for (int v = 0; v < N; ++v) {
 			bin[degree[v]]++;
 		}
-		// Sort the vertices in increasing order of their degree in O(n) using counting sort.
+		// Sort the vertices in increasing order of their degree in
+		// O(n) using counting sort.
 
-		// bin is updated to hold the cumulative sum of bin (of the degrees count)
+		// bin is updated to hold the cumulative sum of bin (of the
+		// degrees count)
 		int start = 1;
 		for (int d = 0; d <= maxDegree; ++d) {
 			int num = bin[d];

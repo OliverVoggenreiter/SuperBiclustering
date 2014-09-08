@@ -33,29 +33,38 @@ public class Degeneracy {
 
 	private static final Random rand = new Random(999);
 
-	public static List<Bicluster> computeBicluster(int minDegeneracy, BinaryMatrix matrix) {
+	public static List<Bicluster> computeBicluster(
+			int minDegeneracy, BinaryMatrix matrix) {
 		MatrixStats stats = computeNodeDegree(matrix);
 		stats = computeNodeOrder(stats);
-		List<KeyValuePair<Integer, Integer>> biclustersToBuild = new ArrayList<KeyValuePair<Integer,Integer>>();
+		List<KeyValuePair<Integer, Integer>> biclustersToBuild =
+				new ArrayList<KeyValuePair<Integer, Integer>>();
 		while (stats.enoughLeft(minDegeneracy)) {
 			if (stats.nextLowestIsRow()) {
 				if (stats.chooseRow(matrix) > minDegeneracy)
-					biclustersToBuild.add(new KeyValuePair<Integer,Integer>(stats.rowsLeft, stats.columnsLeft));
+					biclustersToBuild
+					.add(new KeyValuePair<Integer, Integer>(
+							stats.rowsLeft,
+							stats.columnsLeft));
 			} else {
 				if (stats.choosecolumn(matrix) > minDegeneracy)
-					biclustersToBuild.add(new KeyValuePair<Integer,Integer>(stats.rowsLeft, stats.columnsLeft));
+					biclustersToBuild
+					.add(new KeyValuePair<Integer, Integer>(
+							stats.rowsLeft,
+							stats.columnsLeft));
 			}
 		}
-
 
 		return new ArrayList<Bicluster>();
 	}
 
-	public static MatrixStats computeDegeneracyOrdering(BinaryMatrix matrix) {
+	public static MatrixStats computeDegeneracyOrdering(
+			BinaryMatrix matrix) {
 		return computeDegeneracyOrdering(1, matrix);
 	}
 
-	public static MatrixStats computeDegeneracyOrdering(int minDegeneracy, BinaryMatrix matrix) {
+	public static MatrixStats computeDegeneracyOrdering(
+			int minDegeneracy, BinaryMatrix matrix) {
 		MatrixStats stats = computeNodeDegree(matrix);
 		stats = computeNodeOrder(stats);
 
@@ -114,7 +123,8 @@ public class Degeneracy {
 			if (index < columnDegreeIndices[degree])
 				throw new IllegalArgumentException();
 			int temp = columns[columnDegreeIndices[degree - 1]];
-			columns[columnDegreeIndices[degree - 1]] = columns[index];
+			columns[columnDegreeIndices[degree - 1]] =
+					columns[index];
 			columns[index] = temp;
 			columnDegreeIndices[--columnsD[temp]]++;
 		}
@@ -141,7 +151,8 @@ public class Degeneracy {
 
 		private boolean nextLowestIsRow() {
 			int lowestRowD = rowsD[rows[rowDegreeIndices[0]]];
-			int lowestColD = columnsD[columns[columnDegreeIndices[0]]];
+			int lowestColD =
+					columnsD[columns[columnDegreeIndices[0]]];
 			if (lowestRowD < lowestColD) {
 				return true;
 			}
@@ -152,7 +163,8 @@ public class Degeneracy {
 		}
 	}
 
-	private static MatrixStats computeNodeDegree(BinaryMatrix matrix) {
+	private static MatrixStats
+	computeNodeDegree(BinaryMatrix matrix) {
 		MatrixStats md = new MatrixStats();
 		md.rowsD = new int[matrix.getNumRows()];
 		md.columnsD = new int[matrix.getNumColumns()];
@@ -171,13 +183,16 @@ public class Degeneracy {
 		ms.rows = computeNodeOrder(ms.rowsD);
 		ms.columns = computeNodeOrder(ms.columnsD);
 		ms.rowDegreeIndices = getDegreeIndices(ms.rows, ms.rowsD);
-		ms.columnDegreeIndices = getDegreeIndices(ms.columns, ms.columnsD);
+		ms.columnDegreeIndices =
+				getDegreeIndices(ms.columns, ms.columnsD);
 		return ms;
 	}
 
-	private static int[] getDegreeIndices(Integer[] orderedNodes, int[] degrees) {
+	private static int[] getDegreeIndices(Integer[] orderedNodes,
+			int[] degrees) {
 		// use highest degree in order as size of index.
-		int[] degreeIndices = new int[degrees[orderedNodes[orderedNodes.length - 1]]];
+		int[] degreeIndices =
+				new int[degrees[orderedNodes[orderedNodes.length - 1]]];
 		for (int i = 0; i < orderedNodes.length; i++) {
 			degreeIndices[degrees[i]]++;
 		}
@@ -197,7 +212,8 @@ public class Degeneracy {
 		return order;
 	}
 
-	private static class DegreeComparator implements Comparator<Integer> {
+	private static class DegreeComparator implements
+	Comparator<Integer> {
 
 		private final int[] degrees;
 

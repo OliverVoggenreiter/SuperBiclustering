@@ -84,12 +84,14 @@ public class BBKTask {
 		return biclusters;
 	}
 
-	private void bicluster(int rowTEnd, int rowEnd, int colTEnd, int colEnd) {
+	private void bicluster(int rowTEnd, int rowEnd, int colTEnd,
+			int colEnd) {
 		if (biclusters.size() > maxBiclusters) {
 			return;
 		}
 		if (rowTEnd >= minSize && colTEnd >= minSize) {
-			biclusters.add(BiclusterFactory.newBicluster(rows, rowTEnd, columns, colTEnd));
+			biclusters.add(BiclusterFactory.newBicluster(rows,
+					rowTEnd, columns, colTEnd));
 			return;
 		}
 		if (rowEnd < minSize || colEnd < minSize) {
@@ -111,7 +113,8 @@ public class BBKTask {
 		}
 	}
 
-	private void chooseRow(int rowTEnd, int rowEnd, int colTEnd, int colEnd) {
+	private void chooseRow(int rowTEnd, int rowEnd, int colTEnd,
+			int colEnd) {
 		while (rowTEnd < rowEnd) {
 			int j = colTEnd;
 			int newColEnd = colEnd;
@@ -129,7 +132,8 @@ public class BBKTask {
 		}
 	}
 
-	private void chooseColumn(int rowTEnd, int rowEnd, int colTEnd, int colEnd) {
+	private void chooseColumn(int rowTEnd, int rowEnd, int colTEnd,
+			int colEnd) {
 		while (colTEnd < colEnd) {
 			int j = rowTEnd;
 			int newRowEnd = rowEnd;

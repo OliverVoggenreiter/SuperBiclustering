@@ -19,6 +19,7 @@
 
 package algorithms.generators;
 
+import datatype.bicluster.ArrayBicluster;
 import datatype.bicluster.Bicluster;
 
 public class BiclusterFactory {

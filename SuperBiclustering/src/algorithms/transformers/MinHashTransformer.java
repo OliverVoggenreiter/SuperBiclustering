@@ -60,10 +60,10 @@ import datatype.matrix.BinaryMatrix;
  * @date Mar 11, 2013
  *
  */
-public class OliMinHashTransformer extends TransformerBlock {
+public class MinHashTransformer extends TransformerBlock {
 
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(OliMinHashTransformer.class);
+			.getLogger(MinHashTransformer.class);
 
 	private int bandCount;
 	private int hashesPerBand;
@@ -73,18 +73,9 @@ public class OliMinHashTransformer extends TransformerBlock {
 	private boolean useCrossover;
 	private boolean useRowsColumns;
 
-	private final static int MAX_BICLUSTER_SAMPLES = 100000000; // Adjust
-	// this
-	// according
-	// to
-	// the
-	// use
-	// of
-	// particular
-	// shingle
-	// types.
+	private final static int MAX_BICLUSTER_SAMPLES = 100000000;
 
-	public OliMinHashTransformer(int coreCount, float minDensity,
+	public MinHashTransformer(int coreCount, float minDensity,
 			int numberOfBands, int hashesPerBand,
 			boolean useOverlap, boolean useCrossover,
 			boolean useRowsColumns) {
